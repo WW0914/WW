@@ -1,0 +1,116 @@
+{
+  "protocol_version": "1.0",
+  "document_type": "repair_plan",
+  "run_id": "wrong-part-repair-save-20260723",
+  "created_at": "2026-07-23T17:09:31.622215+08:00",
+  "producer": {
+    "name": "ZD_AutoRepairWorkflow",
+    "component": "repair_planner",
+    "component_version": "1.0.0",
+    "source_baseline": "直顶头审查_v1.0_20260723"
+  },
+  "status": "ready_to_repair",
+  "summary": "已生成修复计划；R1、R3、R4 自动修复项无需人工确认，但仍需由 NX 执行器执行并在执行后复审。",
+  "context": {
+    "nx_version": "v2306.0.0.9141",
+    "part_path": "C:\\Users\\10482\\Desktop\\ZD\\data\\错误的直顶头.prt",
+    "part_name": "错误的直顶头.prt",
+    "part_modified_before_run": null,
+    "workflow_mode": "auto_repair_safe",
+    "wcs_z_axis": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "numeric_tolerance": {
+      "linear": 1e-06,
+      "angular": 1e-06
+    },
+    "selected_body_tags": [
+      "37133"
+    ],
+    "user_inputs": {
+      "min_radius": {
+        "value": 0.0,
+        "unit": "mm",
+        "source": "legacy_result"
+      }
+    }
+  },
+  "data": {
+    "plan_items": [
+      {
+        "plan_id": "PLAN-R1-37133",
+        "issue_id": "R1-37133-GROUP",
+        "action_id": "AUTO_REPAIR_R1_DRAFT_TO_MINIMUM",
+        "action_version": "planned-1",
+        "target_body_tag": "37133",
+        "target_body_selection_index": 0,
+        "target_face_tags": [
+          "37203",
+          "37199",
+          "37188",
+          "37197"
+        ],
+        "parameters": {
+          "target_angle_deg": -3.0,
+          "required_minimum_angle_deg": 3.0
+        },
+        "preconditions": [
+          "必须明确目标实体和四个侧面 Tag",
+          "必须建立 NX Undo Mark 或备份",
+          "必须在执行后复审 R1，且不得产生新的 R2/R3/R4 问题"
+        ],
+        "expected_result": {
+          "rule_id": "R1",
+          "status": "pass"
+        },
+        "affected_objects": [
+          "37203",
+          "37199",
+          "37188",
+          "37197"
+        ],
+        "risk_level": "medium",
+        "approval_status": "not_required",
+        "execution_required": true,
+        "repairability": "auto_repair_allowed",
+        "description": "四个主侧面统一修正为 -3° 有符号拔模角，满足侧面与 Z 轴不小于 3°。"
+      },
+      {
+        "plan_id": "PLAN-R3-37133-005",
+        "issue_id": "R3-37133-005",
+        "action_id": "AUTO_REPAIR_R3_BOTTOM_ROTATE_TO_Z90",
+        "action_version": "planned-1",
+        "target_body_tag": "37133",
+        "target_body_selection_index": 0,
+        "target_face_tags": [
+          "37186"
+        ],
+        "parameters": {
+          "target_angle_to_z_deg": 90.0,
+          "tolerance_deg": 0.1
+        },
+        "preconditions": [
+          "必须明确目标实体和底面 Tag",
+          "必须建立 NX Undo Mark 或备份",
+          "必须在执行后复审 R3，且不得产生新的 R2/R4 问题"
+        ],
+        "expected_result": {
+          "rule_id": "R3",
+          "status": "pass"
+        },
+        "affected_objects": [
+          "37186"
+        ],
+        "risk_level": "high",
+        "approval_status": "not_required",
+        "execution_required": true,
+        "repairability": "auto_repair_allowed",
+        "description": "将底面绕其倾斜方向旋转到与 Z 轴 90°，公差为 ±0.1°。"
+      }
+    ],
+    "execution_required": true
+  },
+  "errors": []
+}

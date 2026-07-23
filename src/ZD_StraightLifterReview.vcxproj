@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64"><Configuration>Release</Configuration><Platform>x64</Platform></ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals"><VCProjectVersion>17.0</VCProjectVersion><ProjectGuid>{57A32D5B-9D3E-4A21-8F30-934B422296FA}</ProjectGuid><Keyword>Win32Proj</Keyword></PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration"><ConfigurationType>DynamicLibrary</ConfigurationType><UseDebugLibraries>false</UseDebugLibraries><PlatformToolset>v143</PlatformToolset><CharacterSet>Unicode</CharacterSet></PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'"><OutDir>C:\Users\10482\Desktop\ZD\tools\</OutDir><IntDir>$(ProjectDir)obj\Release\</IntDir><TargetName>ZD_StraightLifterReview</TargetName></PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile><WarningLevel>Level3</WarningLevel><Optimization>Disabled</Optimization><PreprocessorDefinitions>_WINDOWS;_USRDLL;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions><AdditionalIncludeDirectories>D:\Program Files\Siemens\NX2306\UGOPEN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories><LanguageStandard>stdcpp17</LanguageStandard></ClCompile>
+    <Link><AdditionalLibraryDirectories>D:\Program Files\Siemens\NX2306\UGOPEN;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories><AdditionalDependencies>libnxopencpp.lib;libnxopenuicpp.lib;libufun.lib;%(AdditionalDependencies)</AdditionalDependencies></Link>
+  </ItemDefinitionGroup>
+  <ItemGroup><ClCompile Include="ZD_StraightLifterReview.cpp" /><ClInclude Include="ZD_StraightLifterReview.hpp" /></ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>
+
+
+

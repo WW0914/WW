@@ -1,0 +1,1686 @@
+{
+  "plugin_name": "ZD",
+  "plugin_dir": "C:\\Users\\10482\\Desktop\\ZD",
+  "scanned_at": "2026-07-23T14:10:14",
+  "conclusion": "不通过",
+  "counts": {
+    "P0": 7,
+    "P1": 0,
+    "P2": 0
+  },
+  "issue_count": 7,
+  "issues": [
+    {
+      "severity": "P0",
+      "category": "测试数模",
+      "message": "缺少测试数模：测试文档和 tests/data 说明中均未发现数模引用，tests/data 下也没有数模文件",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "tests/data",
+      "detail": "检查 docs/03-testing/testing.md；若信息缺失，已回退检查 tests/data 下的说明文档。",
+      "impact": "缺少可复核的输入/输出数模或数模关系不清，会导致 NX 测试无法复现，功能正确性无法闭环。",
+      "suggestion": "以 docs/03-testing/testing.md 为主登记输入数模、输出/标准结果数模；信息不足时补 tests/data 下的数据索引或说明文档。",
+      "evidence": "检查 docs/03-testing/testing.md；若信息缺失，已回退检查 tests/data 下的说明文档。"
+    },
+    {
+      "severity": "P0",
+      "category": "使用说明文档",
+      "message": "缺少操作视频目录 docs/04-usage/video",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "docs/04-usage/video",
+      "evidence": "docs/04-usage/video",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "编码规范",
+      "message": "仓库文本文件存在非 UTF-8 编码，编码格式不统一",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.cpp",
+      "detail": "Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.hpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.hpp, src/ZD_StraightLifterReview.cpp 等 8 个",
+      "impact": "不同审查脚本、编译环境或编辑器可能误判中文字符串，甚至触发字符串常量跨行等假阳性/构建风险。",
+      "suggestion": "将源码、工程、脚本和文档等文本文件统一转换为 UTF-8，并在 C/C++ 工程中显式加入 /utf-8 编译选项。",
+      "evidence": "Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.hpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.hpp, src/ZD_StraightLifterReview.cpp 等 8 个"
+    },
+    {
+      "severity": "P0",
+      "category": "源码风险",
+      "message": "DLX 路径硬编码为开发机绝对路径",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.cpp",
+      "detail": "line 68: theDlxFileName = \"C:\\\\Users\\\\10482\\\\Desktop\\\\ZD\\\\tools\\\\ZD_StraightLifterReview.dlx\";",
+      "evidence": "line 68: theDlxFileName = \"C:\\\\Users\\\\10482\\\\Desktop\\\\ZD\\\\tools\\\\ZD_StraightLifterReview.dlx\";",
+      "impact": "发布环境或其他开发机上可能无法加载 Block UI 界面，插件启动即失败。",
+      "suggestion": "改为随 DLL 所在目录、NX 自定义目录或相对部署路径定位 DLX。"
+    },
+    {
+      "severity": "P0",
+      "category": "构建环境",
+      "message": "工程/编译配置中存在 Windows 绝对路径",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.vcxproj",
+      "detail": "line 10: <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Release|x64'\"><OutDir>C:\\Users\\10482\\Desktop\\ZD\\tools\\</OutDir><IntDir>$(ProjectDir)obj\\Release\\</IntDir><TargetName>ZD_StraightLifterReview</TargetName></PropertyGroup>",
+      "impact": "构建或运行依赖个人电脑路径，迁移到其他机器后可能失败。",
+      "suggestion": "使用环境变量、工程宏、相对路径或部署目录推导路径。",
+      "evidence": "line 10: <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Release|x64'\"><OutDir>C:\\Users\\10482\\Desktop\\ZD\\tools\\</OutDir><IntDir>$(ProjectDir)obj\\Release\\</IntDir><TargetName>ZD_StraightLifterReview</TargetName></PropertyGroup>"
+    },
+    {
+      "severity": "P0",
+      "category": "UFUN 使用审查",
+      "message": "源码中存在 UFUN 函数调用",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.cpp",
+      "detail": "UFUN function calls: 2; files: 1; first hit: src/ZD_StraightLifterReview.cpp:366 UF_MODL_ask_bounding_box -> if (UF_MODL_ask_bounding_box(body->Tag(), bodyBox) != 0)",
+      "impact": "正式插件仍依赖 UFUN API，不符合纯 NXOpen 迁移约束，后续编译、部署和维护风险较高。",
+      "suggestion": "将命中的 UF_* 调用替换为 NXOpen API；若确需保留，应先由人工确认并从 P0 清单中单独豁免。",
+      "evidence": "UFUN function calls: 2; files: 1; first hit: src/ZD_StraightLifterReview.cpp:366 UF_MODL_ask_bounding_box -> if (UF_MODL_ask_bounding_box(body->Tag(), bodyBox) != 0)"
+    },
+    {
+      "severity": "P0",
+      "category": "源码临时编译",
+      "message": "源码临时编译未通过",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.vcxproj",
+      "detail": "未找到 MSBuild.exe，无法进行源码临时编译。",
+      "impact": "源码无法通过一次可复建编译，发布 DLL 与源码一致性、后续维护和 NX 人工验证都无法可靠确认。",
+      "suggestion": "修复 Release|x64 工程配置或源码编译错误后，重新运行 `scan_plugin.py --temp-build`。",
+      "evidence": "未找到 MSBuild.exe，无法进行源码临时编译。"
+    }
+  ],
+  "source_audit": {
+    "scan_dirs": [
+      "src",
+      "tests"
+    ],
+    "scanned_file_count": 2,
+    "ufun_function_count": 2,
+    "ufun_file_count": 1,
+    "by_file": {
+      "src/ZD_StraightLifterReview.cpp": 2
+    },
+    "by_symbol": {
+      "UF_MODL_ask_bounding_box": 1,
+      "UF_MODL_ask_face_data": 1
+    },
+    "by_category": {
+      "几何查询": 2
+    },
+    "findings": [
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 366,
+        "symbol": "UF_MODL_ask_bounding_box",
+        "category": "几何查询",
+        "code": "if (UF_MODL_ask_bounding_box(body->Tag(), bodyBox) != 0)"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 425,
+        "symbol": "UF_MODL_ask_face_data",
+        "category": "几何查询",
+        "code": "if (UF_MODL_ask_face_data(face->Tag(), &type, point, direction, faceBox, &radius, &radiusData, &normalDirection) != 0)"
+      }
+    ],
+    "truncated": false
+  },
+  "dialog_audit": {
+    "scope": "src",
+    "non_blocking": true,
+    "affects_admission": false,
+    "scanned_file_count": 2,
+    "non_dlx_dialog_count": 0,
+    "non_dlx_dialog_file_count": 0,
+    "main_non_dlx_dialog_count": 0,
+    "main_non_dlx_dialog_file_count": 0,
+    "message_dialog_count": 12,
+    "auxiliary_dialog_count": 0,
+    "dlx_dialog_count": 1,
+    "dialog_observation_count": 13,
+    "dialog_observation_file_count": 2,
+    "main_uses_non_dlx_dialog": false,
+    "main_uses_dlx_dialog": true,
+    "by_file": {
+      "src/ZD_StraightLifterReview.cpp": 12,
+      "src/ZD_StraightLifterReview.hpp": 1
+    },
+    "by_main_non_dlx_file": {},
+    "by_kind": {
+      "DLX/Block Styler 主界面": 1,
+      "提示/错误弹窗": 12
+    },
+    "by_role": {
+      "dlx": 1,
+      "message": 12
+    },
+    "findings": [
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 69,
+        "role": "dlx",
+        "kind": "DLX/Block Styler 主界面",
+        "original_kind": "Win32/MFC 对话框",
+        "api": "CreateDialog(",
+        "code": "theDialog = ZD_StraightLifterReview::theUI->CreateDialog(theDlxFileName);"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 129,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "ZD_StraightLifterReview::theUI->NXMessageBox()->Show(\"Block Styler\", NXOpen::NXMessageBox::DialogTypeError, ex.what());"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 174,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "ZD_StraightLifterReview::theUI->NXMessageBox()->Show(\"Block Styler\", NXOpen::NXMessageBox::DialogTypeError, ex.what());"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 190,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "ZD_StraightLifterReview::theUI->NXMessageBox()->Show(\"Block Styler\", NXOpen::NXMessageBox::DialogTypeError, ex.what());"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 214,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "ZD_StraightLifterReview::theUI->NXMessageBox()->Show(\"Block Styler\", NXOpen::NXMessageBox::DialogTypeError, ex.what());"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 231,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "ZD_StraightLifterReview::theUI->NXMessageBox()->Show(\"Block Styler\", NXOpen::NXMessageBox::DialogTypeError, ex.what());"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 246,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "ZD_StraightLifterReview::theUI->NXMessageBox()->Show(\"直顶头审查\", NXOpen::NXMessageBox::DialogTypeWarning, \"请至少选择一个直顶头实体后再执行审查。\");"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 258,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "ZD_StraightLifterReview::theUI->NXMessageBox()->Show(\"Block Styler\", NXOpen::NXMessageBox::DialogTypeError, ex.what());"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 408,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "ZD_StraightLifterReview::theUI->NXMessageBox()->Show("
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 410,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "NXOpen::NXMessageBox::DialogTypeWarning,"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 566,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "ZD_StraightLifterReview::theUI->NXMessageBox()->Show(\"Block Styler\", NXOpen::NXMessageBox::DialogTypeError, ex.what());"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.cpp",
+        "line": 587,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "ZD_StraightLifterReview::theUI->NXMessageBox()->Show(\"Block Styler\", NXOpen::NXMessageBox::DialogTypeError, ex.what());"
+      },
+      {
+        "path": "src/ZD_StraightLifterReview.hpp",
+        "line": 30,
+        "role": "message",
+        "kind": "提示/错误弹窗",
+        "original_kind": "NX 普通消息框",
+        "api": "NXMessageBox",
+        "code": "#include <NXOpen/NXMessageBox.hxx>"
+      }
+    ],
+    "truncated": false,
+    "note": "主体非 DLX 对话框、提示/错误弹窗和辅助文件选择对话框均只记录源码线索，不进入 issues，不影响 counts、conclusion 或退出码。"
+  },
+  "dlx_title_audit": {
+    "scope": "active dlx titles in src/application/staging and release zip application/startup entries",
+    "scanned_dlx_count": 0,
+    "title_count": 0,
+    "yanxiu_title_count": 0,
+    "yanxiu_title_file_count": 0,
+    "by_file": {},
+    "findings": [],
+    "title_entries": [],
+    "title_entries_truncated": false,
+    "truncated": false,
+    "prohibited_terms": [
+      "燕秀",
+      "YanXiu",
+      "YxMold/YxMould",
+      "yxmold.com",
+      "yxcax.com",
+      "YX_"
+    ],
+    "note": "仅检查 DLX 窗口标题字段，不扫描按钮、分组、控件标签或普通文本。"
+  },
+  "temp_build_audit": {
+    "enabled": true,
+    "status": "failed",
+    "configuration": "Release",
+    "platform": "x64",
+    "timeout_seconds": 180,
+    "project": "src/ZD_StraightLifterReview.vcxproj",
+    "reason": "未找到 MSBuild.exe，无法进行源码临时编译。"
+  },
+  "git": {
+    "is_git_repo": false,
+    "remote_url": "",
+    "branch": "",
+    "commit": "",
+    "short_commit": "",
+    "dirty": false,
+    "status_short": ""
+  },
+  "category_profile": {
+    "category": "",
+    "focus": []
+  },
+  "rules_path": "C:\\Users\\10482\\.codex\\skills\\skill-main\\nx-plugin-review\\references\\rules.json",
+  "note": "重大问题审查模式：结论只依据 P0 和严重功能/交付 P1。AI 可修复项必须先进入 ai_repair_issues 由 AI 闭环；只有人工事实或 NX 实操确认才进入填写表。",
+  "review_mode": "major_only",
+  "strict_counts": {
+    "P0": 17,
+    "P1": 7,
+    "P2": 17
+  },
+  "strict_issue_count": 41,
+  "deferred_issues": [
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "测试目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "tests",
+      "evidence": "tests",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "文档目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs",
+      "evidence": "docs",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "MCP 目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "mcp",
+      "evidence": "mcp",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "发布目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release",
+      "evidence": "release",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P1",
+      "category": "目录结构",
+      "message": "staging 目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging",
+      "evidence": "staging",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P1",
+      "category": "目录结构",
+      "message": "附件目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "attachments",
+      "evidence": "attachments",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P1",
+      "category": "根文档",
+      "message": "根目录缺少 README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "README.md",
+      "evidence": "README.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P1",
+      "category": "根文档",
+      "message": "根目录缺少 CHANGELOG.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "CHANGELOG.md",
+      "evidence": "CHANGELOG.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P2",
+      "category": "模板结构",
+      "message": "缺少模板根标准文件：.editorconfig",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": ".editorconfig",
+      "evidence": ".editorconfig",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "模板结构",
+      "message": "缺少模板根标准文件：.gitignore",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": ".gitignore",
+      "evidence": ".gitignore",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：docs/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/README.md",
+      "evidence": "docs/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：docs/01-requirements/normalization/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/01-requirements/normalization/README.md",
+      "evidence": "docs/01-requirements/normalization/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：mcp/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "mcp/README.md",
+      "evidence": "mcp/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：release/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/README.md",
+      "evidence": "release/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：release/packages/v1.0.0/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/packages/v1.0.0/README.md",
+      "evidence": "release/packages/v1.0.0/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：src/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/README.md",
+      "evidence": "src/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/README.md",
+      "evidence": "staging/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/Bitmap/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/Bitmap/README.md",
+      "evidence": "staging/package-root/Bitmap/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/config/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/config/README.md",
+      "evidence": "staging/package-root/config/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/data/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/data/README.md",
+      "evidence": "staging/package-root/data/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/startup/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/startup/README.md",
+      "evidence": "staging/package-root/startup/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "需求文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/01-requirements/requirement.md",
+      "evidence": "docs/01-requirements/requirement.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "方案设计文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/02-design/design.md",
+      "evidence": "docs/02-design/design.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "测试文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/03-testing/testing.md",
+      "evidence": "docs/03-testing/testing.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "使用说明文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/04-usage/usage.md",
+      "evidence": "docs/04-usage/usage.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "发布规范",
+      "message": "缺少 release/packages 发布包目录",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/packages",
+      "evidence": "release/packages",
+      "impact": "发布包位置或命名不符合准入规范，影响交付、下载和版本追溯。",
+      "suggestion": "将正式 ZIP 放到规范位置，确认包名和包内根目录结构符合发布规范。"
+    },
+    {
+      "severity": "P1",
+      "category": "发布规范",
+      "message": "缺少 staging/package-root，无法确认发布包来源",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root",
+      "evidence": "staging/package-root",
+      "impact": "发布包位置或命名不符合准入规范，影响交付、下载和版本追溯。",
+      "suggestion": "将正式 ZIP 放到规范位置，确认包名和包内根目录结构符合发布规范。"
+    },
+    {
+      "severity": "P0",
+      "category": "发布规范",
+      "message": "缺少 release/notes/RELEASE-NOTES.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/notes/RELEASE-NOTES.md",
+      "evidence": "release/notes/RELEASE-NOTES.md",
+      "impact": "发布记录不完整或不可追溯，影响版本验收、升级和回滚。",
+      "suggestion": "按模板补齐真实发布信息、变更摘要、包内容、升级说明和回滚说明。"
+    },
+    {
+      "severity": "P1",
+      "category": "MCP 转换",
+      "message": "缺少 mcp 目录，无法确认 MCP 转换交付物",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "mcp",
+      "evidence": "mcp",
+      "impact": "AIAMD 无法按规范发现和调用该插件能力。",
+      "suggestion": "先用 `prepare_mcp_conversion.py` 生成转换填写表和最小脚手架，再补真实 NXOpen 逻辑并运行 `check_mcp_tools.py` 复审。"
+    },
+    {
+      "severity": "P2",
+      "category": "仓库卫生",
+      "message": "存在 __pycache__ 目录 1 个",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/__pycache__",
+      "evidence": "src/__pycache__",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P2",
+      "category": "仓库卫生",
+      "message": "存在 .pyc 缓存文件 3 个",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": ".",
+      "evidence": ".",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P2",
+      "category": "仓库卫生",
+      "message": "源码树内存在构建中间产物 12 个",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/obj/Release/vc143.pdb",
+      "evidence": "src/obj/Release/vc143.pdb",
+      "impact": "构建缓存或审查临时文件混入仓库，会干扰结构审查和发布清单。",
+      "suggestion": "补 .gitignore 后清理或归档对应产物；如确需保留测试 DLL，应在测试文档中说明用途。"
+    },
+    {
+      "severity": "P1",
+      "category": "构建环境",
+      "message": "Release|x64 AdditionalIncludeDirectories 缺少 NX SDK 路径",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/ZD_StraightLifterReview.vcxproj",
+      "detail": "line 12: <ClCompile><WarningLevel>Level3</WarningLevel><Optimization>Disabled</Optimization><PreprocessorDefinitions>_WINDOWS;_USRDLL;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions><AdditionalIncludeDirectories>D:\\Program Files\\Siemens\\NX2306\\UGOPEN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories><LanguageStandard>stdcpp17</LanguageStandard></ClCompile> | Release|x64 AdditionalIncludeDirectories 缺少 NX SDK include 路径",
+      "impact": "Release|x64 编译配置无法找到 NXOpen/UGOPEN 头文件，VS/MSBuild 编译会失败。",
+      "suggestion": "在 Release|x64 的 ClCompile 配置中补充：<AdditionalIncludeDirectories>$(UGII_BASE_DIR)\\ugopen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>；若仓库采用 NxRoot 规范，也可使用 $(NxRoot)\\UGOPEN。",
+      "evidence": "line 12: <ClCompile><WarningLevel>Level3</WarningLevel><Optimization>Disabled</Optimization><PreprocessorDefinitions>_WINDOWS;_USRDLL;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions><AdditionalIncludeDirectories>D:\\Program Files\\Siemens\\NX2306\\UGOPEN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories><LanguageStandard>stdcpp17</LanguageStandard></ClCompile> | Release|x64 AdditionalIncludeDirectories 缺少 NX SDK include 路径"
+    },
+    {
+      "severity": "P2",
+      "category": "源码风险",
+      "message": "源码注释或生成头部存在 Windows 绝对路径，需确认是否为残留",
+      "classification": "manual_check",
+      "blocks_admission": false,
+      "path": "src/ZD_StraightLifterReview.hpp",
+      "detail": "line 6: //       Filename:  C:\\Users\\10482\\Desktop\\ZD\\tools\\ZD_StraightLifterReview.hpp",
+      "evidence": "line 6: //       Filename:  C:\\Users\\10482\\Desktop\\ZD\\tools\\ZD_StraightLifterReview.hpp",
+      "impact": "构建或运行依赖个人电脑路径，迁移到其他机器后可能失败。",
+      "suggestion": "使用环境变量、工程宏、相对路径或部署目录推导路径。"
+    }
+  ],
+  "deferred_counts": {
+    "P0": 10,
+    "P1": 7,
+    "P2": 17
+  },
+  "deferred_issue_count": 34,
+  "major_ai_repair_issues": [
+    {
+      "severity": "P0",
+      "category": "测试数模",
+      "message": "缺少测试数模：测试文档和 tests/data 说明中均未发现数模引用，tests/data 下也没有数模文件",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "tests/data",
+      "detail": "检查 docs/03-testing/testing.md；若信息缺失，已回退检查 tests/data 下的说明文档。",
+      "impact": "缺少可复核的输入/输出数模或数模关系不清，会导致 NX 测试无法复现，功能正确性无法闭环。",
+      "suggestion": "以 docs/03-testing/testing.md 为主登记输入数模、输出/标准结果数模；信息不足时补 tests/data 下的数据索引或说明文档。",
+      "evidence": "检查 docs/03-testing/testing.md；若信息缺失，已回退检查 tests/data 下的说明文档。"
+    },
+    {
+      "severity": "P0",
+      "category": "编码规范",
+      "message": "仓库文本文件存在非 UTF-8 编码，编码格式不统一",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.cpp",
+      "detail": "Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.hpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.hpp, src/ZD_StraightLifterReview.cpp 等 8 个",
+      "impact": "不同审查脚本、编译环境或编辑器可能误判中文字符串，甚至触发字符串常量跨行等假阳性/构建风险。",
+      "suggestion": "将源码、工程、脚本和文档等文本文件统一转换为 UTF-8，并在 C/C++ 工程中显式加入 /utf-8 编译选项。",
+      "evidence": "Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.hpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.hpp, src/ZD_StraightLifterReview.cpp 等 8 个"
+    },
+    {
+      "severity": "P0",
+      "category": "源码风险",
+      "message": "DLX 路径硬编码为开发机绝对路径",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.cpp",
+      "detail": "line 68: theDlxFileName = \"C:\\\\Users\\\\10482\\\\Desktop\\\\ZD\\\\tools\\\\ZD_StraightLifterReview.dlx\";",
+      "evidence": "line 68: theDlxFileName = \"C:\\\\Users\\\\10482\\\\Desktop\\\\ZD\\\\tools\\\\ZD_StraightLifterReview.dlx\";",
+      "impact": "发布环境或其他开发机上可能无法加载 Block UI 界面，插件启动即失败。",
+      "suggestion": "改为随 DLL 所在目录、NX 自定义目录或相对部署路径定位 DLX。"
+    },
+    {
+      "severity": "P0",
+      "category": "构建环境",
+      "message": "工程/编译配置中存在 Windows 绝对路径",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.vcxproj",
+      "detail": "line 10: <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Release|x64'\"><OutDir>C:\\Users\\10482\\Desktop\\ZD\\tools\\</OutDir><IntDir>$(ProjectDir)obj\\Release\\</IntDir><TargetName>ZD_StraightLifterReview</TargetName></PropertyGroup>",
+      "impact": "构建或运行依赖个人电脑路径，迁移到其他机器后可能失败。",
+      "suggestion": "使用环境变量、工程宏、相对路径或部署目录推导路径。",
+      "evidence": "line 10: <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Release|x64'\"><OutDir>C:\\Users\\10482\\Desktop\\ZD\\tools\\</OutDir><IntDir>$(ProjectDir)obj\\Release\\</IntDir><TargetName>ZD_StraightLifterReview</TargetName></PropertyGroup>"
+    },
+    {
+      "severity": "P0",
+      "category": "UFUN 使用审查",
+      "message": "源码中存在 UFUN 函数调用",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.cpp",
+      "detail": "UFUN function calls: 2; files: 1; first hit: src/ZD_StraightLifterReview.cpp:366 UF_MODL_ask_bounding_box -> if (UF_MODL_ask_bounding_box(body->Tag(), bodyBox) != 0)",
+      "impact": "正式插件仍依赖 UFUN API，不符合纯 NXOpen 迁移约束，后续编译、部署和维护风险较高。",
+      "suggestion": "将命中的 UF_* 调用替换为 NXOpen API；若确需保留，应先由人工确认并从 P0 清单中单独豁免。",
+      "evidence": "UFUN function calls: 2; files: 1; first hit: src/ZD_StraightLifterReview.cpp:366 UF_MODL_ask_bounding_box -> if (UF_MODL_ask_bounding_box(body->Tag(), bodyBox) != 0)"
+    },
+    {
+      "severity": "P0",
+      "category": "源码临时编译",
+      "message": "源码临时编译未通过",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.vcxproj",
+      "detail": "未找到 MSBuild.exe，无法进行源码临时编译。",
+      "impact": "源码无法通过一次可复建编译，发布 DLL 与源码一致性、后续维护和 NX 人工验证都无法可靠确认。",
+      "suggestion": "修复 Release|x64 工程配置或源码编译错误后，重新运行 `scan_plugin.py --temp-build`。",
+      "evidence": "未找到 MSBuild.exe，无法进行源码临时编译。"
+    }
+  ],
+  "major_ai_repair_counts": {
+    "P0": 6,
+    "P1": 0,
+    "P2": 0
+  },
+  "major_ai_repair_issue_count": 6,
+  "ai_repair_issues": [
+    {
+      "severity": "P0",
+      "category": "测试数模",
+      "message": "缺少测试数模：测试文档和 tests/data 说明中均未发现数模引用，tests/data 下也没有数模文件",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "tests/data",
+      "detail": "检查 docs/03-testing/testing.md；若信息缺失，已回退检查 tests/data 下的说明文档。",
+      "impact": "缺少可复核的输入/输出数模或数模关系不清，会导致 NX 测试无法复现，功能正确性无法闭环。",
+      "suggestion": "以 docs/03-testing/testing.md 为主登记输入数模、输出/标准结果数模；信息不足时补 tests/data 下的数据索引或说明文档。",
+      "evidence": "检查 docs/03-testing/testing.md；若信息缺失，已回退检查 tests/data 下的说明文档。"
+    },
+    {
+      "severity": "P0",
+      "category": "编码规范",
+      "message": "仓库文本文件存在非 UTF-8 编码，编码格式不统一",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.cpp",
+      "detail": "Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.hpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.hpp, src/ZD_StraightLifterReview.cpp 等 8 个",
+      "impact": "不同审查脚本、编译环境或编辑器可能误判中文字符串，甚至触发字符串常量跨行等假阳性/构建风险。",
+      "suggestion": "将源码、工程、脚本和文档等文本文件统一转换为 UTF-8，并在 C/C++ 工程中显式加入 /utf-8 编译选项。",
+      "evidence": "Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/src/ZD_StraightLifterReview.hpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.cpp, Command/冻结版本/直顶头审查_v1.0_20260723/tools/ZD_StraightLifterReview.hpp, src/ZD_StraightLifterReview.cpp 等 8 个"
+    },
+    {
+      "severity": "P0",
+      "category": "源码风险",
+      "message": "DLX 路径硬编码为开发机绝对路径",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.cpp",
+      "detail": "line 68: theDlxFileName = \"C:\\\\Users\\\\10482\\\\Desktop\\\\ZD\\\\tools\\\\ZD_StraightLifterReview.dlx\";",
+      "evidence": "line 68: theDlxFileName = \"C:\\\\Users\\\\10482\\\\Desktop\\\\ZD\\\\tools\\\\ZD_StraightLifterReview.dlx\";",
+      "impact": "发布环境或其他开发机上可能无法加载 Block UI 界面，插件启动即失败。",
+      "suggestion": "改为随 DLL 所在目录、NX 自定义目录或相对部署路径定位 DLX。"
+    },
+    {
+      "severity": "P0",
+      "category": "构建环境",
+      "message": "工程/编译配置中存在 Windows 绝对路径",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.vcxproj",
+      "detail": "line 10: <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Release|x64'\"><OutDir>C:\\Users\\10482\\Desktop\\ZD\\tools\\</OutDir><IntDir>$(ProjectDir)obj\\Release\\</IntDir><TargetName>ZD_StraightLifterReview</TargetName></PropertyGroup>",
+      "impact": "构建或运行依赖个人电脑路径，迁移到其他机器后可能失败。",
+      "suggestion": "使用环境变量、工程宏、相对路径或部署目录推导路径。",
+      "evidence": "line 10: <PropertyGroup Condition=\"'$(Configuration)|$(Platform)'=='Release|x64'\"><OutDir>C:\\Users\\10482\\Desktop\\ZD\\tools\\</OutDir><IntDir>$(ProjectDir)obj\\Release\\</IntDir><TargetName>ZD_StraightLifterReview</TargetName></PropertyGroup>"
+    },
+    {
+      "severity": "P0",
+      "category": "UFUN 使用审查",
+      "message": "源码中存在 UFUN 函数调用",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.cpp",
+      "detail": "UFUN function calls: 2; files: 1; first hit: src/ZD_StraightLifterReview.cpp:366 UF_MODL_ask_bounding_box -> if (UF_MODL_ask_bounding_box(body->Tag(), bodyBox) != 0)",
+      "impact": "正式插件仍依赖 UFUN API，不符合纯 NXOpen 迁移约束，后续编译、部署和维护风险较高。",
+      "suggestion": "将命中的 UF_* 调用替换为 NXOpen API；若确需保留，应先由人工确认并从 P0 清单中单独豁免。",
+      "evidence": "UFUN function calls: 2; files: 1; first hit: src/ZD_StraightLifterReview.cpp:366 UF_MODL_ask_bounding_box -> if (UF_MODL_ask_bounding_box(body->Tag(), bodyBox) != 0)"
+    },
+    {
+      "severity": "P0",
+      "category": "源码临时编译",
+      "message": "源码临时编译未通过",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "src/ZD_StraightLifterReview.vcxproj",
+      "detail": "未找到 MSBuild.exe，无法进行源码临时编译。",
+      "impact": "源码无法通过一次可复建编译，发布 DLL 与源码一致性、后续维护和 NX 人工验证都无法可靠确认。",
+      "suggestion": "修复 Release|x64 工程配置或源码编译错误后，重新运行 `scan_plugin.py --temp-build`。",
+      "evidence": "未找到 MSBuild.exe，无法进行源码临时编译。"
+    },
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "测试目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "tests",
+      "evidence": "tests",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "文档目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs",
+      "evidence": "docs",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "MCP 目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "mcp",
+      "evidence": "mcp",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "发布目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release",
+      "evidence": "release",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P1",
+      "category": "目录结构",
+      "message": "staging 目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging",
+      "evidence": "staging",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P1",
+      "category": "目录结构",
+      "message": "附件目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "attachments",
+      "evidence": "attachments",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P1",
+      "category": "根文档",
+      "message": "根目录缺少 README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "README.md",
+      "evidence": "README.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P1",
+      "category": "根文档",
+      "message": "根目录缺少 CHANGELOG.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "CHANGELOG.md",
+      "evidence": "CHANGELOG.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P2",
+      "category": "模板结构",
+      "message": "缺少模板根标准文件：.editorconfig",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": ".editorconfig",
+      "evidence": ".editorconfig",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "模板结构",
+      "message": "缺少模板根标准文件：.gitignore",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": ".gitignore",
+      "evidence": ".gitignore",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：docs/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/README.md",
+      "evidence": "docs/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：docs/01-requirements/normalization/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/01-requirements/normalization/README.md",
+      "evidence": "docs/01-requirements/normalization/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：mcp/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "mcp/README.md",
+      "evidence": "mcp/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：release/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/README.md",
+      "evidence": "release/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：release/packages/v1.0.0/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/packages/v1.0.0/README.md",
+      "evidence": "release/packages/v1.0.0/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：src/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/README.md",
+      "evidence": "src/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/README.md",
+      "evidence": "staging/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/Bitmap/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/Bitmap/README.md",
+      "evidence": "staging/package-root/Bitmap/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/config/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/config/README.md",
+      "evidence": "staging/package-root/config/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/data/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/data/README.md",
+      "evidence": "staging/package-root/data/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/startup/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/startup/README.md",
+      "evidence": "staging/package-root/startup/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "需求文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/01-requirements/requirement.md",
+      "evidence": "docs/01-requirements/requirement.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "方案设计文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/02-design/design.md",
+      "evidence": "docs/02-design/design.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "测试文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/03-testing/testing.md",
+      "evidence": "docs/03-testing/testing.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "使用说明文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/04-usage/usage.md",
+      "evidence": "docs/04-usage/usage.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "发布规范",
+      "message": "缺少 release/packages 发布包目录",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/packages",
+      "evidence": "release/packages",
+      "impact": "发布包位置或命名不符合准入规范，影响交付、下载和版本追溯。",
+      "suggestion": "将正式 ZIP 放到规范位置，确认包名和包内根目录结构符合发布规范。"
+    },
+    {
+      "severity": "P1",
+      "category": "发布规范",
+      "message": "缺少 staging/package-root，无法确认发布包来源",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root",
+      "evidence": "staging/package-root",
+      "impact": "发布包位置或命名不符合准入规范，影响交付、下载和版本追溯。",
+      "suggestion": "将正式 ZIP 放到规范位置，确认包名和包内根目录结构符合发布规范。"
+    },
+    {
+      "severity": "P0",
+      "category": "发布规范",
+      "message": "缺少 release/notes/RELEASE-NOTES.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/notes/RELEASE-NOTES.md",
+      "evidence": "release/notes/RELEASE-NOTES.md",
+      "impact": "发布记录不完整或不可追溯，影响版本验收、升级和回滚。",
+      "suggestion": "按模板补齐真实发布信息、变更摘要、包内容、升级说明和回滚说明。"
+    },
+    {
+      "severity": "P1",
+      "category": "MCP 转换",
+      "message": "缺少 mcp 目录，无法确认 MCP 转换交付物",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "mcp",
+      "evidence": "mcp",
+      "impact": "AIAMD 无法按规范发现和调用该插件能力。",
+      "suggestion": "先用 `prepare_mcp_conversion.py` 生成转换填写表和最小脚手架，再补真实 NXOpen 逻辑并运行 `check_mcp_tools.py` 复审。"
+    },
+    {
+      "severity": "P2",
+      "category": "仓库卫生",
+      "message": "存在 __pycache__ 目录 1 个",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/__pycache__",
+      "evidence": "src/__pycache__",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P2",
+      "category": "仓库卫生",
+      "message": "存在 .pyc 缓存文件 3 个",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": ".",
+      "evidence": ".",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P2",
+      "category": "仓库卫生",
+      "message": "源码树内存在构建中间产物 12 个",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/obj/Release/vc143.pdb",
+      "evidence": "src/obj/Release/vc143.pdb",
+      "impact": "构建缓存或审查临时文件混入仓库，会干扰结构审查和发布清单。",
+      "suggestion": "补 .gitignore 后清理或归档对应产物；如确需保留测试 DLL，应在测试文档中说明用途。"
+    },
+    {
+      "severity": "P1",
+      "category": "构建环境",
+      "message": "Release|x64 AdditionalIncludeDirectories 缺少 NX SDK 路径",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/ZD_StraightLifterReview.vcxproj",
+      "detail": "line 12: <ClCompile><WarningLevel>Level3</WarningLevel><Optimization>Disabled</Optimization><PreprocessorDefinitions>_WINDOWS;_USRDLL;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions><AdditionalIncludeDirectories>D:\\Program Files\\Siemens\\NX2306\\UGOPEN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories><LanguageStandard>stdcpp17</LanguageStandard></ClCompile> | Release|x64 AdditionalIncludeDirectories 缺少 NX SDK include 路径",
+      "impact": "Release|x64 编译配置无法找到 NXOpen/UGOPEN 头文件，VS/MSBuild 编译会失败。",
+      "suggestion": "在 Release|x64 的 ClCompile 配置中补充：<AdditionalIncludeDirectories>$(UGII_BASE_DIR)\\ugopen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>；若仓库采用 NxRoot 规范，也可使用 $(NxRoot)\\UGOPEN。",
+      "evidence": "line 12: <ClCompile><WarningLevel>Level3</WarningLevel><Optimization>Disabled</Optimization><PreprocessorDefinitions>_WINDOWS;_USRDLL;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions><AdditionalIncludeDirectories>D:\\Program Files\\Siemens\\NX2306\\UGOPEN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories><LanguageStandard>stdcpp17</LanguageStandard></ClCompile> | Release|x64 AdditionalIncludeDirectories 缺少 NX SDK include 路径"
+    },
+    {
+      "severity": "P2",
+      "category": "源码风险",
+      "message": "源码注释或生成头部存在 Windows 绝对路径，需确认是否为残留",
+      "classification": "manual_check",
+      "blocks_admission": false,
+      "path": "src/ZD_StraightLifterReview.hpp",
+      "detail": "line 6: //       Filename:  C:\\Users\\10482\\Desktop\\ZD\\tools\\ZD_StraightLifterReview.hpp",
+      "evidence": "line 6: //       Filename:  C:\\Users\\10482\\Desktop\\ZD\\tools\\ZD_StraightLifterReview.hpp",
+      "impact": "构建或运行依赖个人电脑路径，迁移到其他机器后可能失败。",
+      "suggestion": "使用环境变量、工程宏、相对路径或部署目录推导路径。"
+    }
+  ],
+  "ai_repair_counts": {
+    "P0": 16,
+    "P1": 7,
+    "P2": 17
+  },
+  "ai_repair_issue_count": 40,
+  "ai_followup_issues": [
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "测试目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "tests",
+      "evidence": "tests",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "文档目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs",
+      "evidence": "docs",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "MCP 目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "mcp",
+      "evidence": "mcp",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P0",
+      "category": "目录结构",
+      "message": "发布目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release",
+      "evidence": "release",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P1",
+      "category": "目录结构",
+      "message": "staging 目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging",
+      "evidence": "staging",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P1",
+      "category": "目录结构",
+      "message": "附件目录缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "attachments",
+      "evidence": "attachments",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P1",
+      "category": "根文档",
+      "message": "根目录缺少 README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "README.md",
+      "evidence": "README.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P1",
+      "category": "根文档",
+      "message": "根目录缺少 CHANGELOG.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "CHANGELOG.md",
+      "evidence": "CHANGELOG.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P2",
+      "category": "模板结构",
+      "message": "缺少模板根标准文件：.editorconfig",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": ".editorconfig",
+      "evidence": ".editorconfig",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "模板结构",
+      "message": "缺少模板根标准文件：.gitignore",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": ".gitignore",
+      "evidence": ".gitignore",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：docs/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/README.md",
+      "evidence": "docs/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：docs/01-requirements/normalization/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/01-requirements/normalization/README.md",
+      "evidence": "docs/01-requirements/normalization/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：mcp/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "mcp/README.md",
+      "evidence": "mcp/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：release/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/README.md",
+      "evidence": "release/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：release/packages/v1.0.0/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/packages/v1.0.0/README.md",
+      "evidence": "release/packages/v1.0.0/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：src/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/README.md",
+      "evidence": "src/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/README.md",
+      "evidence": "staging/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/Bitmap/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/Bitmap/README.md",
+      "evidence": "staging/package-root/Bitmap/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/config/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/config/README.md",
+      "evidence": "staging/package-root/config/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/data/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/data/README.md",
+      "evidence": "staging/package-root/data/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P2",
+      "category": "目录说明",
+      "message": "缺少模板目录 README：staging/package-root/startup/README.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root/startup/README.md",
+      "evidence": "staging/package-root/startup/README.md",
+      "impact": "仓库看似可运行，但不符合模板事实源和目录说明约定，后续发布/复审容易漏项。",
+      "suggestion": "参考 workspace/模板 补齐对应 README、章节标题或根标准文件，保持内容贴合当前插件，不做大范围重写。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "需求文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/01-requirements/requirement.md",
+      "evidence": "docs/01-requirements/requirement.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "方案设计文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/02-design/design.md",
+      "evidence": "docs/02-design/design.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "测试文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/03-testing/testing.md",
+      "evidence": "docs/03-testing/testing.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "文档规范",
+      "message": "使用说明文档缺失",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "docs/04-usage/usage.md",
+      "evidence": "docs/04-usage/usage.md",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。"
+    },
+    {
+      "severity": "P0",
+      "category": "发布规范",
+      "message": "缺少 release/packages 发布包目录",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/packages",
+      "evidence": "release/packages",
+      "impact": "发布包位置或命名不符合准入规范，影响交付、下载和版本追溯。",
+      "suggestion": "将正式 ZIP 放到规范位置，确认包名和包内根目录结构符合发布规范。"
+    },
+    {
+      "severity": "P1",
+      "category": "发布规范",
+      "message": "缺少 staging/package-root，无法确认发布包来源",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "staging/package-root",
+      "evidence": "staging/package-root",
+      "impact": "发布包位置或命名不符合准入规范，影响交付、下载和版本追溯。",
+      "suggestion": "将正式 ZIP 放到规范位置，确认包名和包内根目录结构符合发布规范。"
+    },
+    {
+      "severity": "P0",
+      "category": "发布规范",
+      "message": "缺少 release/notes/RELEASE-NOTES.md",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "release/notes/RELEASE-NOTES.md",
+      "evidence": "release/notes/RELEASE-NOTES.md",
+      "impact": "发布记录不完整或不可追溯，影响版本验收、升级和回滚。",
+      "suggestion": "按模板补齐真实发布信息、变更摘要、包内容、升级说明和回滚说明。"
+    },
+    {
+      "severity": "P1",
+      "category": "MCP 转换",
+      "message": "缺少 mcp 目录，无法确认 MCP 转换交付物",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "mcp",
+      "evidence": "mcp",
+      "impact": "AIAMD 无法按规范发现和调用该插件能力。",
+      "suggestion": "先用 `prepare_mcp_conversion.py` 生成转换填写表和最小脚手架，再补真实 NXOpen 逻辑并运行 `check_mcp_tools.py` 复审。"
+    },
+    {
+      "severity": "P2",
+      "category": "仓库卫生",
+      "message": "存在 __pycache__ 目录 1 个",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/__pycache__",
+      "evidence": "src/__pycache__",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P2",
+      "category": "仓库卫生",
+      "message": "存在 .pyc 缓存文件 3 个",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": ".",
+      "evidence": ".",
+      "impact": "可能影响插件库准入、发布可追溯性或后续维护。",
+      "suggestion": "按插件库规范补齐或调整后重新审查。"
+    },
+    {
+      "severity": "P2",
+      "category": "仓库卫生",
+      "message": "源码树内存在构建中间产物 12 个",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/obj/Release/vc143.pdb",
+      "evidence": "src/obj/Release/vc143.pdb",
+      "impact": "构建缓存或审查临时文件混入仓库，会干扰结构审查和发布清单。",
+      "suggestion": "补 .gitignore 后清理或归档对应产物；如确需保留测试 DLL，应在测试文档中说明用途。"
+    },
+    {
+      "severity": "P1",
+      "category": "构建环境",
+      "message": "Release|x64 AdditionalIncludeDirectories 缺少 NX SDK 路径",
+      "classification": "deferred",
+      "blocks_admission": false,
+      "path": "src/ZD_StraightLifterReview.vcxproj",
+      "detail": "line 12: <ClCompile><WarningLevel>Level3</WarningLevel><Optimization>Disabled</Optimization><PreprocessorDefinitions>_WINDOWS;_USRDLL;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions><AdditionalIncludeDirectories>D:\\Program Files\\Siemens\\NX2306\\UGOPEN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories><LanguageStandard>stdcpp17</LanguageStandard></ClCompile> | Release|x64 AdditionalIncludeDirectories 缺少 NX SDK include 路径",
+      "impact": "Release|x64 编译配置无法找到 NXOpen/UGOPEN 头文件，VS/MSBuild 编译会失败。",
+      "suggestion": "在 Release|x64 的 ClCompile 配置中补充：<AdditionalIncludeDirectories>$(UGII_BASE_DIR)\\ugopen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>；若仓库采用 NxRoot 规范，也可使用 $(NxRoot)\\UGOPEN。",
+      "evidence": "line 12: <ClCompile><WarningLevel>Level3</WarningLevel><Optimization>Disabled</Optimization><PreprocessorDefinitions>_WINDOWS;_USRDLL;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions><AdditionalIncludeDirectories>D:\\Program Files\\Siemens\\NX2306\\UGOPEN;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories><LanguageStandard>stdcpp17</LanguageStandard></ClCompile> | Release|x64 AdditionalIncludeDirectories 缺少 NX SDK include 路径"
+    },
+    {
+      "severity": "P2",
+      "category": "源码风险",
+      "message": "源码注释或生成头部存在 Windows 绝对路径，需确认是否为残留",
+      "classification": "manual_check",
+      "blocks_admission": false,
+      "path": "src/ZD_StraightLifterReview.hpp",
+      "detail": "line 6: //       Filename:  C:\\Users\\10482\\Desktop\\ZD\\tools\\ZD_StraightLifterReview.hpp",
+      "evidence": "line 6: //       Filename:  C:\\Users\\10482\\Desktop\\ZD\\tools\\ZD_StraightLifterReview.hpp",
+      "impact": "构建或运行依赖个人电脑路径，迁移到其他机器后可能失败。",
+      "suggestion": "使用环境变量、工程宏、相对路径或部署目录推导路径。"
+    }
+  ],
+  "ai_followup_counts": {
+    "P0": 10,
+    "P1": 7,
+    "P2": 17
+  },
+  "ai_followup_issue_count": 34,
+  "human_pending_issues": [
+    {
+      "severity": "P0",
+      "category": "使用说明文档",
+      "message": "缺少操作视频目录 docs/04-usage/video",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "docs/04-usage/video",
+      "evidence": "docs/04-usage/video",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。",
+      "closure_group": "重大待人工确认",
+      "suggested_owner": "用户填写"
+    }
+  ],
+  "human_pending_counts": {
+    "P0": 1,
+    "P1": 0,
+    "P2": 0
+  },
+  "human_pending_issue_count": 1,
+  "blocking_input_issues": [
+    {
+      "severity": "P0",
+      "category": "使用说明文档",
+      "message": "缺少操作视频目录 docs/04-usage/video",
+      "classification": "finding",
+      "blocks_admission": true,
+      "path": "docs/04-usage/video",
+      "evidence": "docs/04-usage/video",
+      "impact": "需求、设计、测试或使用过程缺少审查依据，影响准入判断和后续维护。",
+      "suggestion": "按对应模板补齐缺失章节，避免使用“待补充”替代验收信息。",
+      "closure_group": "重大待人工确认",
+      "suggested_owner": "用户填写"
+    }
+  ],
+  "blocking_input_issue_count": 1,
+  "confirmed_facts": {
+    "plugin_id": false,
+    "target_nx": false,
+    "release_package_name": false,
+    "release_date": false,
+    "git_url": false
+  },
+  "major_conclusion": "不通过",
+  "closure_complete": false
+}

@@ -1,0 +1,62 @@
+{
+  "protocol_version": "1.0",
+  "document_type": "repair_execution",
+  "run_id": "wrong-part-repair-save-20260723",
+  "created_at": "2026-07-23T17:09:31.627286+08:00",
+  "producer": {
+    "name": "ZD_AutoRepairWorkflow",
+    "component": "nx_repair_executor",
+    "component_version": "1.0.0"
+  },
+  "status": "success",
+  "part_path": "C:\\Users\\10482\\Desktop\\ZD\\data\\错误的直顶头.prt",
+  "items": [
+    {
+      "plan_id": "PLAN-R3-37133-005",
+      "issue_id": "R3-37133-005",
+      "action_id": "AUTO_REPAIR_R3_BOTTOM_ROTATE_TO_Z90",
+      "status": "pass",
+      "target_body_tag": "37133",
+      "target_face_tags": [
+        "37186"
+      ],
+      "stationary_face_tag": null,
+      "target_angle_deg": null,
+      "correction_angle_deg": 0.9999999999999002,
+      "axis_tag": "37100",
+      "feature_tag": "38472",
+      "remaining_rule_issues": []
+    },
+    {
+      "plan_id": "PLAN-R1-37133",
+      "issue_id": "R1-37133-GROUP",
+      "action_id": "AUTO_REPAIR_R1_DRAFT_TO_MINIMUM",
+      "status": "pass",
+      "target_body_tag": "37133",
+      "target_face_tags": [
+        "37203",
+        "37199",
+        "37188",
+        "37197"
+      ],
+      "stationary_face_tag": "37186",
+      "target_angle_deg": -3.0,
+      "correction_angle_deg": null,
+      "axis_tag": null,
+      "feature_tag": "38492",
+      "remaining_rule_issues": []
+    }
+  ],
+  "rollback": {
+    "available": true,
+    "used": false,
+    "mark_id": "87"
+  },
+  "save": {
+    "requested": true,
+    "saved": true,
+    "path": "C:\\Users\\10482\\Desktop\\ZD\\data\\错误的直顶头.prt"
+  },
+  "errors": [],
+  "review_after_path": "C:\\Users\\10482\\Desktop\\ZD\\data\\workflow_runs\\wrong-part-repair-save-20260723\\review-after.json"
+}

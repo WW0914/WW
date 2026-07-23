@@ -1,0 +1,219 @@
+{
+  "protocol_version": "1.0",
+  "document_type": "review_after",
+  "run_id": "wrong-part-repair-save-20260723-after",
+  "created_at": "2026-07-23T17:09:32.060859+08:00",
+  "producer": {
+    "name": "ZD_AutoRepairWorkflow",
+    "component": "review_result_adapter",
+    "component_version": "1.0.0",
+    "source_baseline": "直顶头审查_v1.0_20260723"
+  },
+  "status": "no_issue",
+  "summary": "修复后复审完成，发现0个问题。",
+  "context": {
+    "nx_version": "v2306.0.0.9141",
+    "part_path": "C:\\Users\\10482\\Desktop\\ZD\\data\\错误的直顶头.prt",
+    "part_name": "错误的直顶头.prt",
+    "part_modified_before_run": null,
+    "workflow_mode": "verify_only",
+    "wcs_z_axis": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "numeric_tolerance": {
+      "linear": 1e-06,
+      "angular": 1e-06
+    },
+    "selected_body_tags": [
+      "37133"
+    ],
+    "user_inputs": {
+      "min_radius": {
+        "value": 0.0,
+        "unit": "mm",
+        "source": "legacy_result"
+      }
+    }
+  },
+  "data": {
+    "body_results": [
+      {
+        "body_tag": "37133",
+        "body_name": null,
+        "selection_index": 0,
+        "review_status": "pass",
+        "bounding_box": {
+          "min": null,
+          "max": null,
+          "height": 47.89957829952124,
+          "unit": "mm",
+          "source": "legacy_height_only"
+        },
+        "rule_results": [
+          {
+            "rule_id": "R2",
+            "rule_name": "Z向最小高度",
+            "enabled": true,
+            "status": "pass",
+            "standard": {
+              "comparison": "gte",
+              "value": 30.0,
+              "unit": "mm"
+            },
+            "measurements": [
+              {
+                "height": 47.89957829952124,
+                "required_height_increase": 0.0,
+                "unit": "mm",
+                "status": "pass"
+              }
+            ],
+            "failed_object_tags": [],
+            "reason_code": null,
+            "reason": "通过",
+            "evidence": {
+              "height_mm": 47.89957829952124,
+              "threshold_mm": 30.0
+            }
+          },
+          {
+            "rule_id": "R1",
+            "rule_name": "主侧面最小倾角",
+            "enabled": true,
+            "status": "pass",
+            "standard": {
+              "comparison": "gte",
+              "value": 3.0,
+              "unit": "degree"
+            },
+            "measurements": [
+              {
+                "face_tag": "37203",
+                "angle_to_z": 3.0000000000000004,
+                "unit": "degree",
+                "status": "pass"
+              },
+              {
+                "face_tag": "37199",
+                "angle_to_z": 3.0000000000000004,
+                "unit": "degree",
+                "status": "pass"
+              },
+              {
+                "face_tag": "37188",
+                "angle_to_z": 3.0000000000000004,
+                "unit": "degree",
+                "status": "pass"
+              },
+              {
+                "face_tag": "37197",
+                "angle_to_z": 3.0000000000000004,
+                "unit": "degree",
+                "status": "pass"
+              }
+            ],
+            "failed_object_tags": [],
+            "reason_code": null,
+            "reason": "通过",
+            "evidence": {
+              "side_face_count": 4
+            }
+          },
+          {
+            "rule_id": "R3",
+            "rule_name": "底面与Z轴角度",
+            "enabled": true,
+            "status": "pass",
+            "standard": {
+              "value": 90.0,
+              "tolerance": 0.1,
+              "unit": "degree"
+            },
+            "measurements": [
+              {
+                "face_tag": 37186,
+                "angle_to_z_deg": 90.0
+              }
+            ],
+            "failed_object_tags": [],
+            "reason_code": null,
+            "reason": "通过",
+            "evidence": {
+              "candidate_face_tag": "37186"
+            }
+          },
+          {
+            "rule_id": "R4",
+            "rule_name": "有符号拔模方向",
+            "enabled": true,
+            "status": "pass",
+            "standard": {
+              "comparison": "lte",
+              "value": 0.0,
+              "unit": "degree"
+            },
+            "measurements": [
+              {
+                "face_tag": "37203",
+                "angle_to_z": 3.0000000000000004,
+                "outward_normal_z": -0.052335956242943835,
+                "unit": "degree",
+                "status": "pass"
+              },
+              {
+                "face_tag": "37199",
+                "angle_to_z": 3.0000000000000004,
+                "outward_normal_z": -0.052335956242943835,
+                "unit": "degree",
+                "status": "pass"
+              },
+              {
+                "face_tag": "37188",
+                "angle_to_z": 3.0000000000000004,
+                "outward_normal_z": -0.052335956242943835,
+                "unit": "degree",
+                "status": "pass"
+              },
+              {
+                "face_tag": "37197",
+                "angle_to_z": 3.0000000000000004,
+                "outward_normal_z": -0.052335956242943835,
+                "unit": "degree",
+                "status": "pass"
+              }
+            ],
+            "failed_object_tags": [],
+            "reason_code": null,
+            "reason": "通过",
+            "evidence": {
+              "r4_failed_face_tags": []
+            }
+          },
+          {
+            "rule_id": "R9",
+            "rule_name": "最小圆角",
+            "enabled": false,
+            "status": "disabled",
+            "standard": {
+              "value": 0.0,
+              "unit": "mm"
+            },
+            "measurements": [],
+            "failed_object_tags": [],
+            "reason_code": "R9_DISABLED_BY_ZERO_INPUT",
+            "reason": "输入为0 mm，已关闭",
+            "evidence": {
+              "radius_limit_mm": 0.0
+            }
+          }
+        ],
+        "issue_ids": [],
+        "display_actions": []
+      }
+    ],
+    "issues": []
+  },
+  "errors": []
+}
